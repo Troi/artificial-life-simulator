@@ -1,0 +1,13 @@
+Projekt se spouští pomoci nástroje ant
+Pro kompilaci dat zadejtejeden z následujícíhc pøíkazù
+
+	ant
+	ant compile
+
+Pro následné spuštìní programu potom
+	
+	ant run
+
+Pro odstranìní zkompilovaných dat
+	
+	ant clean

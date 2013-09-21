@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+
+<project name="vivae" basedir="." default="compile">
+    <property name="BUILD_DIR" value="build"/>
+    <property name="CLASSES_DIR" value="${BUILD_DIR}/classes"/>
+    <property name="SRC_DIR" value="src"/>
+    <property name="LIB_DIR" value="lib"/>
+
+    <target name="clean">
+        <delete includeemptydirs="true">
+            <fileset dir="${BUILD_DIR}" includes="**/*"/>
+        </delete>
+        <delete  includeemptydirs="true" dir="${BUILD_DIR}" />
+    </target>
+
+    <target name="make_dirs">
+        <mkdir dir="${CLASSES_DIR}"/>
+        <copy todir="${BUILD_DIR}/${LIB_DIR}"> 
+            <fileset dir="${LIB_DIR}"/>
+        </copy>
+    </target>
+
+    <target name="compile" depends="make_dirs">
+        <javac srcdir="${SRC_DIR}" destdir="${CLASSES_DIR}" debug="true" includeantruntime= "false">
+            <classpath>
+                <fileset dir="${LIB_DIR}">
+                    <include name="**/*.jar"/>
+                </fileset>
+            </classpath>
+
+        </javac>
+        <!--copy todir="${CLASSES_DIR}">
+            <fileset dir="${SRC_DIR}" excludes="**/*.java,**/*.form"/>
+        </copy -->
+    </target>
+
+    <target name="run">
+        <java classname="vivae.blovstom.TomExperiment" fork="true" failonerror="true" dir="${BUILD_DIR}">
+            <classpath>
+                <fileset dir="${LIB_DIR}">
+                    <include name="**/*.jar"/>
+                </fileset>
+                <pathelement location="${CLASSES_DIR}"/>
+            </classpath>
+        </java>
+    </target>
+
+
+</project>
